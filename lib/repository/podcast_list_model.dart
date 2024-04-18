@@ -73,8 +73,8 @@ class Playlist {
   String? image;
   List<Images>? images;
   String? feedid;
-  int? duration;
-  int? pubdate;
+  num? duration;
+  num? pubdate;
   String? description;
   String? tags;
   List<Sources>? sources;
@@ -150,7 +150,7 @@ class Playlist {
 
 class Images {
   String? src;
-  int? width;
+  num? width;
   String? type;
 
   Images({this.src, this.width, this.type});
@@ -173,12 +173,12 @@ class Images {
 class Sources {
   String? file;
   String? type;
-  int? height;
-  int? width;
+  num? height;
+  num? width;
   String? label;
-  int? bitrate;
-  int? filesize;
-  int? framerate;
+  num? bitrate;
+  num? filesize;
+  num? framerate;
 
   Sources({this.file, this.type, this.height, this.width, this.label, this.bitrate, this.filesize, this.framerate});
 

@@ -25,13 +25,18 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     getPodcastData();
-    CarPlayTemplate().initCarPlay();
   }
 
   getPodcastData() async {
     await PodcastRepository().getPodcastCategories().then((value) async {
       podcastCategories = value;
-      podcastList = await PodcastRepository().getPodcastList(podcastCategories[0].contentId);
+      debugPrint("length ${value.length.toString()}");
+      await PodcastRepository()
+          .getPodcastList(podcastCategories[0].contentId)
+          .then((podcast) {
+        podcastList = podcast;
+        CarPlayTemplate().initCarPlay();
+      });
     });
   }
 
@@ -40,7 +45,6 @@ class _MyAppState extends State<MyApp> {
     CarPlayTemplate().disposeCarplay();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {

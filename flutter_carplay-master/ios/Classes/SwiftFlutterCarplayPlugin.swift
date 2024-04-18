@@ -56,7 +56,7 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
         SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPTabBarTemplate).get
         break
       case String(describing: FCPGridTemplate.self):
-        NSLog("**** DATA:: FCPGridTemplate *****************")
+        NSLog("**** DATA:: 1FCPGridTemplate *****************")
         rootTemplate = FCPGridTemplate(obj: args["rootTemplate"] as! [String : Any])
         SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPGridTemplate).get
         break
@@ -69,22 +69,22 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
         SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPPointOfInterestTemplate).get
         break
       case String(describing: FCPListTemplate.self):
-        NSLog("**** DATA:: FCPListTemplate *****************")
+        NSLog("**** DATA:: 1FCPListTemplate1 *****************")
         rootTemplate = FCPListTemplate(obj: args["rootTemplate"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT)
         SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPListTemplate).get
         break
       case String(describing: FCPNowPlayingTemplate.self):
-        NSLog("Thai gayu *****************")
+        NSLog("**** DATA:: 1Thai gayu *****************")
         rootTemplate = FCPListTemplate(obj: args["rootTemplate"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT)
         SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPListTemplate).get
         break
       default:
-        NSLog("Nai Thai *****************")
+        NSLog("**** DATA:: 1Nai Thai  default*****************")
         result(false)
         return
       }
       SwiftFlutterCarplayPlugin.objcRootTemplate = rootTemplate
-      NSLog("Nai Thai *****************")
+      NSLog("**** DATA:: 1Nai Thai SwiftFlutterCarplayPlugin*****************")
       let animated = args["animated"] as! Bool
       SwiftFlutterCarplayPlugin.animated = animated
       result(true)
@@ -187,7 +187,7 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
       let animated = args["animated"] as! Bool
       switch args["runtimeType"] as! String {
       case String(describing: FCPGridTemplate.self):
-        NSLog("FCPGridTemplate Nai Thai *****************")
+        NSLog("**** DATA:: 2FCPGridTemplate Nai Thai *****************")
         pushTemplate = FCPGridTemplate(obj: args["template"] as! [String : Any]).get
         break
       case String(describing: FCPPointOfInterestTemplate.self):
@@ -198,11 +198,11 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
         break
     
       case String(describing: FCPListTemplate.self):
-        NSLog("FCPListTemplate Nai Thai *****************")
+        NSLog("**** DATA:: 2FCPListTemplate Nai Thai *****************")
         pushTemplate = FCPListTemplate(obj: args["template"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT).get
         break
       case String(describing: FCPNowPlayingTemplate.self):
-        NSLog("FCPNowPlayingTemplate Nai Thai *****************")
+        NSLog("**** DATA:: 2FCPNowPlayingTemplate Nai Thai *****************")
 //        pushTemplate = FCPNowPlayingTemplate(obj: args["template"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT).get
          pushTemplate = FCPListTemplate(obj: args["template"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT).get
         break

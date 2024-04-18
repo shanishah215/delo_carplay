@@ -47,7 +47,13 @@ class FCPListItem {
       }
     }
     if image != nil {
-      listItem.setImage(UIImage().fromFlutterAsset(name: image!))
+      if image!.starts(with: "http"){
+        let url = URL(string: image!)
+        let stationImage = try? UIImage(withURL: url!)
+        listItem.setImage(stationImage)
+      } else {
+          listItem.setImage(UIImage().fromFlutterAsset(name: image!))
+      }
     }
     if playbackProgress != nil {
       listItem.playbackProgress = playbackProgress!

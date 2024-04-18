@@ -14,8 +14,8 @@ extension UIImage {
   @available(iOS 14.0, *)
   func fromFlutterAsset(name: String) -> UIImage {
     let key: String? = SwiftFlutterCarplayPlugin.registrar?.lookupKey(forAsset: name)
-//    let image: UIImage? = UIImage(imageLiteralResourceName: key!)
-    return UIImage(systemName: "questionmark")!
+   let image: UIImage? = UIImage(imageLiteralResourceName: key!)
+    return image ?? UIImage(systemName: "questionmark")!
   }
     
   func resizeImageTo(size: CGSize) -> UIImage? {

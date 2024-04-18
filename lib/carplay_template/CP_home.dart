@@ -10,8 +10,9 @@ final FlutterCarplay flutterCarplay = FlutterCarplay();
 List<PodcastMenuModel> podcastCategories = [];
 PodcastListData? podcastList;
 
-
 class CarPlayTemplate {
+  List<CPListSection> section1Items = [];
+  List<CPListSection> section2Items = [];
 
   List<String> categoryList = [
     'Najnovejši podkasti',
@@ -29,23 +30,66 @@ class CarPlayTemplate {
   ];
 
   updatePodcastList(String id) async {
-    podcastList = await PodcastRepository().getPodcastList(id);
+    await PodcastRepository().getPodcastList(id).then((value) {
+      print('podcast list length ${value!.playlist!.length}');
+      podcastList = value;
+
+      section2Items = [];
+      section2Items.add(CPListSection(
+        items: podcastList != null
+            ? podcastList!.playlist!
+                .map((e) => CPListItem(
+                      text: e.title.toString(),
+                      detailText: e.description.toString(),
+                      image: e.image,
+                    ))
+                .toList()
+            : categoryList
+                .map((e) => CPListItem(
+                      text: 'Loading',
+                      detailText: "Detail Text",
+                      image: 'images/flutter_1080px.png',
+                    ))
+                .toList(),
+      ));
+
+      CPTabBarTemplate tabTemplate = CPTabBarTemplate(
+        templates: [
+          CPListTemplate(
+            sections: section1Items,
+            title: "Kategorije",
+            systemIcon: "list.bullet.below.rectangle",
+          ),
+          CPListTemplate(
+            sections: section2Items,
+            title: "Podkasti",
+            systemIcon: "play",
+          ),
+        ],
+      );
+
+      FlutterCarplay.setRootTemplate(
+        rootTemplate: tabTemplate,
+        animated: true,
+      );
+
+      flutterCarplay.forceUpdateRootTemplate();
+    });
   }
 
-
   initCarPlay() {
-    final List<CPListSection> section1Items = [];
-    section1Items.add(CPListSection(
+    section1Items.add(
+      CPListSection(
         items: podcastCategories
             .map((e) => CPListItem(
                   text: e.title,
-          onPress: (complete, self) {
-            updatePodcastList(e.contentId);
-            complete();
-          },
+                  onPress: (complete, self) {
+                    updatePodcastList(e.contentId);
+                    complete();
+                  },
                 ))
             .toList(),
-    ),
+      ),
     );
 
     // final List<CPListSection> section2Items = [];
@@ -111,7 +155,6 @@ class CarPlayTemplate {
     //   header: "Features",
     // ));
 
-    final List<CPListSection> section2Items = [];
     section2Items.add(CPListSection(
       items: podcastList != null
           ? podcastList!.playlist!

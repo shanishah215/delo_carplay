@@ -13,6 +13,21 @@ PodcastListData? podcastList;
 
 class CarPlayTemplate {
 
+  List<String> categoryList = [
+    'Najnovejši podkasti',
+    'Moč politike',
+    'Od srede do srede',
+    'Super moč',
+    'Odprta kuhinja',
+    'Moč gospodarstva',
+    'Najnovejši podkasti',
+    'Moč politike',
+    'Od srede do srede',
+    'Super moč',
+    'Odprta kuhinja',
+    'Moč gospodarstva'
+  ];
+
   updatePodcastList(String id) async {
     podcastList = await PodcastRepository().getPodcastList(id);
   }

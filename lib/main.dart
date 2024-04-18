@@ -24,8 +24,15 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    PodcastRepository().getPodcastList('Ib6cSYfC');
+    getPodcastData();
     CarPlayTemplate().initCarPlay();
+  }
+
+  getPodcastData() async {
+    await PodcastRepository().getPodcastCategories().then((value) async {
+      podcastCategories = value;
+      podcastList = await PodcastRepository().getPodcastList(podcastCategories[0].contentId);
+    });
   }
 
   @override

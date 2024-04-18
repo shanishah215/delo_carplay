@@ -1,38 +1,37 @@
 import 'dart:io';
 
+import 'package:delo_automotive/repository/podcast_list_model.dart';
 import 'package:delo_automotive/repository/podcast_menu_model.dart';
+import 'package:delo_automotive/repository/podcast_repo.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 
 CPConnectionStatusTypes connectionStatus = CPConnectionStatusTypes.unknown;
 final FlutterCarplay flutterCarplay = FlutterCarplay();
+List<PodcastMenuModel> podcastCategories = [];
+PodcastListData? podcastList;
 
 
 class CarPlayTemplate {
-  List<PodcastMenuModel> podcastCategories = [];
 
-  List<String> categoryList = [
-    'Najnovejši podkasti',
-    'Moč politike',
-    'Od srede do srede',
-    'Super moč',
-    'Odprta kuhinja',
-    'Moč gospodarstva',
-    'Najnovejši podkasti',
-    'Moč politike',
-    'Od srede do srede',
-    'Super moč',
-    'Odprta kuhinja',
-    'Moč gospodarstva'
-  ];
+  updatePodcastList(String id) async {
+    podcastList = await PodcastRepository().getPodcastList(id);
+  }
+
 
   initCarPlay() {
     final List<CPListSection> section1Items = [];
     section1Items.add(CPListSection(
-        items: categoryList
+        items: podcastCategories
             .map((e) => CPListItem(
-                  text: e,
+                  text: e.title,
+          onPress: (complete, self) {
+            updatePodcastList(e.contentId);
+            complete();
+          },
                 ))
-            .toList()));
+            .toList(),
+    ),
+    );
 
     // final List<CPListSection> section2Items = [];
     // section2Items.add(CPListSection(
@@ -98,12 +97,22 @@ class CarPlayTemplate {
     // ));
 
     final List<CPListSection> section2Items = [];
-     section2Items.add(CPListSection(
-     items: categoryList.map((e) => CPListItem(
-          text: '$e - 1',
-          detailText: "Detail Text",
-          image: 'images/flutter_1080px.png',
-        )).toList(),
+    section2Items.add(CPListSection(
+      items: podcastList != null
+          ? podcastList!.playlist!
+              .map((e) => CPListItem(
+                    text: e.title.toString(),
+                    detailText: e.description.toString(),
+                    image: 'images/flutter_1080px.png',
+                  ))
+              .toList()
+          : categoryList
+              .map((e) => CPListItem(
+                    text: 'Loading',
+                    detailText: "Detail Text",
+                    image: 'images/flutter_1080px.png',
+                  ))
+              .toList(),
     ));
 
     FlutterCarplay.setRootTemplate(

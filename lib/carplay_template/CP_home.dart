@@ -1,11 +1,15 @@
 import 'dart:io';
 
+import 'package:delo_automotive/repository/podcast_menu_model.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 
 CPConnectionStatusTypes connectionStatus = CPConnectionStatusTypes.unknown;
 final FlutterCarplay flutterCarplay = FlutterCarplay();
 
+
 class CarPlayTemplate {
+  List<PodcastMenuModel> podcastCategories = [];
+
   List<String> categoryList = [
     'Najnovejši podkasti',
     'Moč politike',
@@ -299,56 +303,5 @@ class CarPlayTemplate {
       ),
       animated: true,
     );
-  }
-
-  void openInformationTemplate() {
-    FlutterCarplay.push(
-        template: CPInformationTemplate(
-            title: "Title",
-            layout: CPInformationTemplateLayout.twoColumn,
-            actions: [
-          CPTextButton(
-              title: "Button Title 1",
-              onPress: () {
-                print("Button 1");
-              }),
-          CPTextButton(
-              title: "Button Title 2",
-              onPress: () {
-                print("Button 2");
-              }),
-        ],
-            informationItems: [
-          CPInformationItem(title: "Item title 1", detail: "detail 1"),
-          CPInformationItem(title: "Item title 2", detail: "detail 2"),
-        ]));
-  }
-
-  void openPoiTemplate() {
-    FlutterCarplay.push(
-        template: CPPointOfInterestTemplate(title: "Title", poi: [
-          CPPointOfInterest(
-            latitude: 51.5052,
-            longitude: 7.4938,
-            title: "Title",
-            subtitle: "Subtitle",
-            summary: "Summary",
-            detailTitle: "DetailTitle",
-            detailSubtitle: "detailSubtitle",
-            detailSummary: "detailSummary",
-            image: "images/logo_flutter_1080px_clr.png",
-            primaryButton: CPTextButton(
-                title: "Primary",
-                onPress: () {
-                  print("Primary button pressed");
-                }),
-            secondaryButton: CPTextButton(
-                title: "Secondary",
-                onPress: () {
-                  print("Secondary button pressed");
-                }),
-          ),
-        ]),
-        animated: true);
   }
 }

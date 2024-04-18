@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:delo_automotive/carplay_template/CP_home.dart';
+import 'package:delo_automotive/repository/podcast_repo.dart';
 import 'package:delo_automotive/screens/home_screen.dart';
 import 'package:delo_automotive/screens/no_internet.dart';
 import 'package:delo_automotive/utils/theme.dart';
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    PodcastRepository().getPodcastList('Ib6cSYfC');
     CarPlayTemplate().initCarPlay();
   }
 

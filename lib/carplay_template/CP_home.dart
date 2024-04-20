@@ -10,9 +10,24 @@ final FlutterCarplay flutterCarplay = FlutterCarplay();
 List<PodcastMenuModel> podcastCategories = [];
 PodcastListData? podcastList;
 
+
 class CarPlayTemplate {
   List<CPListSection> section1Items = [];
   List<CPListSection> section2Items = [];
+
+  CPListTemplate firstTab = CPListTemplate(
+          sections: [],
+          title: "Kategorije",
+          systemIcon: "list.bullet.below.rectangle",
+        );
+
+  CPListTemplate secondTab = CPListTemplate(
+          sections: [],
+          title: "Podkasti",
+          systemIcon: "play",
+        );
+
+  CPListTemplate? selectedTemplate;
 
   List<String> categoryList = [
     'Najnovejši podkasti',
@@ -53,23 +68,29 @@ class CarPlayTemplate {
                 .toList(),
       ));
 
-      CPTabBarTemplate tabTemplate = CPTabBarTemplate(
-        templates: [
-          CPListTemplate(
-            sections: section1Items,
-            title: "Kategorije",
-            systemIcon: "list.bullet.below.rectangle",
-          ),
-          CPListTemplate(
+      // CPTabBarTemplate tabTemplate = CPTabBarTemplate(
+      //   templates: [
+      //     CPListTemplate(
+      //       sections: section1Items,
+      //       title: "Kategorije",
+      //       systemIcon: "list.bullet.below.rectangle",
+      //     ),
+      //     ,
+      //   ],
+      // );
+      FlutterCarplay.push(
+        template: CPListTemplate(
             sections: section2Items,
             title: "Podkasti",
             systemIcon: "play",
+            backButton: CPBarButton(
+                title: "Back",
+                style: CPBarButtonStyles.none,
+                onPress: () {
+                  FlutterCarplay.pop(animated: true);
+          },
+        )
           ),
-        ],
-      );
-
-      FlutterCarplay.setRootTemplate(
-        rootTemplate: tabTemplate,
         animated: true,
       );
 
@@ -84,7 +105,7 @@ class CarPlayTemplate {
             .map((e) => CPListItem(
                   text: e.title,
                   onPress: (complete, self) {
-                    updatePodcastList(e.contentId);
+                    updatePodcastList(e.contentId); 
                     complete();
                   },
                 ))
@@ -92,76 +113,16 @@ class CarPlayTemplate {
       ),
     );
 
-    // final List<CPListSection> section2Items = [];
-    // section2Items.add(CPListSection(
-    //   items: [
-    //     CPListItem(
-    //       text: "Now PLaying",
-    //       detailText: "Action template that the user can perform on an alert",
-    //       onPress: (complete, self) {
-    //         openNowPlayingTemplate();
-    //         complete();
-    //       },
-    //     ),
-    //     CPListItem(
-    //       text: "Alert",
-    //       detailText: "Action template that the user can perform on an alert",
-    //       onPress: (complete, self) {
-    //         // showAlert();
-    //         complete();
-    //       },
-    //     ),
-    //     CPListItem(
-    //       text: "Grid Template",
-    //       detailText: "A template that displays and manages a grid of items",
-    //       onPress: (complete, self) {
-    //         openGridTemplate();
-    //         complete();
-    //       },
-    //     ),
-    //     CPListItem(
-    //       text: "Action Sheet",
-    //       detailText: "A template that displays a modal action sheet",
-    //       onPress: (complete, self) {
-    //         // showActionSheet();
-    //         complete();
-    //       },
-    //     ),
-    //     CPListItem(
-    //       text: "List Template",
-    //       detailText: "Displays and manages a list of items",
-    //       onPress: (complete, self) {
-    //         openListTemplate();
-    //         complete();
-    //       },
-    //     ),
-    //     CPListItem(
-    //       text: "Information Template",
-    //       detailText: "Displays a list of items and up to three actions",
-    //       onPress: (complete, self) {
-    //         openInformationTemplate();
-    //         complete();
-    //       },
-    //     ),
-    //     CPListItem(
-    //       text: "Point Of Interest Template",
-    //       detailText: "Displays a Map with points of interest.",
-    //       onPress: (complete, self) {
-    //         openPoiTemplate();
-    //         complete();
-    //       },
-    //     ),
-    //   ],
-    //   header: "Features",
-    // ));
-
     section2Items.add(CPListSection(
       items: podcastList != null
           ? podcastList!.playlist!
               .map((e) => CPListItem(
                     text: e.title.toString(),
                     detailText: e.description.toString(),
-                    image: 'images/flutter_1080px.png',
+                    image: e.image,
+                    onPress: (complete, self) {
+                      openNowPlayingTemplate();
+                    },
                   ))
               .toList()
           : categoryList

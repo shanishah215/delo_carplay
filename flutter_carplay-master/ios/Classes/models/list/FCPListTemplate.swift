@@ -25,12 +25,12 @@ class FCPListTemplate {
   init(obj: [String : Any], templateType: FCPListTemplateTypes) {
     self.elementId = obj["_elementId"] as! String
     self.title = obj["title"] as? String
-    self.systemIcon = obj["systemIcon"] as! String
+    self.systemIcon = obj["systemIcon"] as? String ?? ""
     self.emptyViewTitleVariants = obj["emptyViewTitleVariants"] as? [String] ?? []
     self.emptyViewSubtitleVariants = obj["emptyViewSubtitleVariants"] as? [String] ?? []
-    self.showsTabBadge = obj["showsTabBadge"] as! Bool
-    self.templateType = templateType 
-    self.objcSections = (obj["sections"] as! Array<[String : Any]>).map {
+    self.showsTabBadge = obj["showsTabBadge"] as? Bool ?? false
+    self.templateType = templateType
+    self.objcSections = (obj["sections"] as? Array<[String : Any]> ?? []).map {
       FCPListSection(obj: $0)
     }
     self.sections = self.objcSections.map {

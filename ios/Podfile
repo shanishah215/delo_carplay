@@ -40,5 +40,11 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+
+    # Add arm64 architecture
+    target.build_configurations.each do |config|
+      config.build_settings['ARCHS'] = '$(ARCHS_STANDARD)' if config.build_settings['ARCHS'].nil?
+      config.build_settings['ARCHS'] += ' arm64' unless config.build_settings['ARCHS'].include?('arm64')
+    end
   end
 end

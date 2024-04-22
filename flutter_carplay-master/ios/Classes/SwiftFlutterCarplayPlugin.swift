@@ -74,12 +74,12 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
         SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPListTemplate).get
         break
       case String(describing: FCPNowPlayingTemplate.self):
-        NSLog("**** DATA:: 1Thai gayu *****************")
+        NSLog("**** DATA:: FCPNowPlayingTemplate *****************")
         rootTemplate = FCPListTemplate(obj: args["rootTemplate"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT)
         SwiftFlutterCarplayPlugin.rootTemplate = (rootTemplate as! FCPListTemplate).get
         break
       default:
-        NSLog("**** DATA:: 1Nai Thai  default*****************")
+        NSLog("**** DATA:: Default Case *****************")
         result(false)
         return
       }
@@ -203,8 +203,8 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
         break
       case String(describing: FCPNowPlayingTemplate.self):
         NSLog("**** DATA:: 2FCPNowPlayingTemplate Nai Thai *****************")
-//        pushTemplate = FCPNowPlayingTemplate(obj: args["template"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT).get
-         pushTemplate = FCPListTemplate(obj: args["template"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT).get
+       pushTemplate = FCPNowPlayingTemplate(obj: args["template"] as! [String : Any]).get
+        //  pushTemplate = FCPListTemplate(obj: args["template"] as! [String : Any], templateType: FCPListTemplateTypes.DEFAULT).get
         break
       default:
         result(false)

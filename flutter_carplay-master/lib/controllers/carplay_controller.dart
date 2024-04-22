@@ -92,6 +92,7 @@ class FlutterCarPlayController {
         template.runtimeType == CPGridTemplate ||
         template.runtimeType == CPInformationTemplate ||
         template.runtimeType == CPPointOfInterestTemplate ||
+        template.runtimeType == CPNowPlayingTemplate ||
         template.runtimeType == CPListTemplate) {
       templateHistory.add(template);
     } else {

@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:delo_automotive/screens/no_internet.dart';
-import 'package:delo_automotive/utils/custom_audio_player.dart';
-import 'package:delo_automotive/utils/constants.dart';
+import '../screens/no_internet.dart';
+import '../utils/custom_audio_player.dart';
+import '../utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -25,7 +25,7 @@ class _MediaPlayerState extends State<MediaPlayer> {
     !widget.continuePlaying ? initAudioPlayer() : null;
   }
 
-  Future<void> initAudioPlayer() async{
+  Future<void> initAudioPlayer() async {
     await CustomAudioPlayer.initAudioPlayer().then((value) async {
       await CustomAudioPlayer.playAudio();
     });
@@ -35,19 +35,24 @@ class _MediaPlayerState extends State<MediaPlayer> {
   @override
   Widget build(BuildContext context) {
     brightness = Theme.of(context).brightness;
-    return StreamBuilder(stream: Connectivity().onConnectivityChanged, builder: (context, snapshot) {
-      if(snapshot.data != [] && snapshot.data != null) {
-        return Stack(
-          children: [
-            buildBody(),
-            snapshot.data!.contains(ConnectivityResult.none) ? NoInternet() : Container()
-          ],
-        );
-      } else {
-        return buildBody();
-      }
-      // return buildBody();
-    },);
+    return StreamBuilder(
+      stream: Connectivity().onConnectivityChanged,
+      builder: (context, snapshot) {
+        if (snapshot.data != [] && snapshot.data != null) {
+          return Stack(
+            children: [
+              buildBody(),
+              snapshot.data!.contains(ConnectivityResult.none)
+                  ? NoInternet()
+                  : Container()
+            ],
+          );
+        } else {
+          return buildBody();
+        }
+        // return buildBody();
+      },
+    );
   }
 
   Widget buildBody() {
@@ -60,7 +65,8 @@ class _MediaPlayerState extends State<MediaPlayer> {
         toolbarHeight: 80,
         leadingWidth: 0,
         title: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30, top: 35, bottom: 15),
+          padding:
+              const EdgeInsets.only(left: 30, right: 30, top: 35, bottom: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -71,7 +77,10 @@ class _MediaPlayerState extends State<MediaPlayer> {
                   child: SvgPicture.asset(Constants.backArrowLight)),
               Text(
                 "Najnovejši podkasti",
-                style: Theme.of(context).listTileTheme.subtitleTextStyle!.copyWith(fontSize: 26),
+                style: Theme.of(context)
+                    .listTileTheme
+                    .subtitleTextStyle!
+                    .copyWith(fontSize: 26),
               )
             ],
           ),
@@ -94,7 +103,10 @@ class _MediaPlayerState extends State<MediaPlayer> {
                       children: [
                         Text(
                           'Markeš: Takrat sem verjel Janši',
-                          style: Theme.of(context).listTileTheme.titleTextStyle!.copyWith(fontSize: 36),
+                          style: Theme.of(context)
+                              .listTileTheme
+                              .titleTextStyle!
+                              .copyWith(fontSize: 36),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 120),
@@ -103,7 +115,10 @@ class _MediaPlayerState extends State<MediaPlayer> {
                             softWrap: true,
                             textAlign: TextAlign.center,
                             maxLines: 3,
-                            style: Theme.of(context).listTileTheme.subtitleTextStyle!.copyWith(fontSize: 26),
+                            style: Theme.of(context)
+                                .listTileTheme
+                                .subtitleTextStyle!
+                                .copyWith(fontSize: 26),
                           ),
                         ),
                         const SizedBox(
@@ -116,41 +131,61 @@ class _MediaPlayerState extends State<MediaPlayer> {
                             children: [
                               InkWell(
                                 onTap: () async {
-                                  await CustomAudioPlayer.assetsAudioPlayer.seekBy(- const Duration(seconds: 15));
+                                  await CustomAudioPlayer.assetsAudioPlayer
+                                      .seekBy(-const Duration(seconds: 15));
                                 },
                                 child: SvgPicture.asset(
                                   Constants.mediaBack15Sec,
                                   height: 40,
-                                  colorFilter: ColorFilter.mode(brightness == Brightness.light ?  Constants.lightThemeSubtitle : Constants.darkThemeText, BlendMode.srcIn),
+                                  colorFilter: ColorFilter.mode(
+                                      brightness == Brightness.light
+                                          ? Constants.lightThemeSubtitle
+                                          : Constants.darkThemeText,
+                                      BlendMode.srcIn),
                                 ),
                               ),
                               StreamBuilder(
-                                stream: CustomAudioPlayer.assetsAudioPlayer.isPlaying,
+                                stream: CustomAudioPlayer
+                                    .assetsAudioPlayer.isPlaying,
                                 builder: (context, snapshot) {
-                                  if(snapshot.data != null){
+                                  if (snapshot.data != null) {
                                     isPlaying = snapshot.data!;
                                   }
                                   return SizedBox(
                                     width: 80,
                                     child: InkWell(
                                       onTap: () async {
-                                        isPlaying ? CustomAudioPlayer.pauseAudio() : CustomAudioPlayer.playAudio();
+                                        isPlaying
+                                            ? CustomAudioPlayer.pauseAudio()
+                                            : CustomAudioPlayer.playAudio();
                                       },
                                       child: Center(
-                                          child: Icon(isPlaying ? Icons.pause : Icons.play_arrow_rounded,
-                                            color: brightness == Brightness.light ?  Constants.lightThemeSubtitle : Constants.darkThemeText,
-                                            size: isPlaying ? 50 : 60,)
-                                      ),),
+                                          child: Icon(
+                                        isPlaying
+                                            ? Icons.pause
+                                            : Icons.play_arrow_rounded,
+                                        color: brightness == Brightness.light
+                                            ? Constants.lightThemeSubtitle
+                                            : Constants.darkThemeText,
+                                        size: isPlaying ? 50 : 60,
+                                      )),
+                                    ),
                                   );
-                                },),
+                                },
+                              ),
                               InkWell(
                                 onTap: () async {
-                                  await CustomAudioPlayer.assetsAudioPlayer.seekBy(const Duration(seconds: 15));
+                                  await CustomAudioPlayer.assetsAudioPlayer
+                                      .seekBy(const Duration(seconds: 15));
                                 },
                                 child: SvgPicture.asset(
                                   Constants.mediaForward15Sec,
                                   height: 40,
-                                  colorFilter: ColorFilter.mode(brightness == Brightness.light ?  Constants.lightThemeSubtitle : Constants.darkThemeText, BlendMode.srcIn),
+                                  colorFilter: ColorFilter.mode(
+                                      brightness == Brightness.light
+                                          ? Constants.lightThemeSubtitle
+                                          : Constants.darkThemeText,
+                                      BlendMode.srcIn),
                                 ),
                               ),
                             ],
@@ -177,12 +212,14 @@ class _MediaPlayerState extends State<MediaPlayer> {
               child: StreamBuilder(
                 stream: CustomAudioPlayer.assetsAudioPlayer.currentPosition,
                 builder: (context, snapshot) {
-                  if(snapshot.data != null){
+                  if (snapshot.data != null) {
                     songCurrentPosDuration = snapshot.data!;
                     songCurrentPos = snapshot.data!.inSeconds.toDouble();
-                    if(songCurrentPos == CustomAudioPlayer.songDuration?.inSeconds){
+                    if (songCurrentPos ==
+                        CustomAudioPlayer.songDuration?.inSeconds) {
                       CustomAudioPlayer.pauseAudio();
-                      CustomAudioPlayer.assetsAudioPlayer.seek(const Duration(seconds: 0));
+                      CustomAudioPlayer.assetsAudioPlayer
+                          .seek(const Duration(seconds: 0));
                     }
                   }
                   return Row(
@@ -190,31 +227,38 @@ class _MediaPlayerState extends State<MediaPlayer> {
                       Expanded(
                           flex: 2,
                           child: Text(
-                            "${songCurrentPosDuration.inMinutes}:${(songCurrentPosDuration.inSeconds % 60).toString().padLeft(2,'0')}",
+                            "${songCurrentPosDuration.inMinutes}:${(songCurrentPosDuration.inSeconds % 60).toString().padLeft(2, '0')}",
                             textAlign: TextAlign.right,
                           )),
                       Expanded(
                         flex: 16,
                         child: Slider(
-                          max: CustomAudioPlayer.songDuration != null ? CustomAudioPlayer.songDuration!.inSeconds.toDouble() : 0,
+                          max: CustomAudioPlayer.songDuration != null
+                              ? CustomAudioPlayer.songDuration!.inSeconds
+                                  .toDouble()
+                              : 0,
                           min: 0,
                           activeColor: Theme.of(context).iconTheme.color,
-                          inactiveColor: brightness == Brightness.light ?  Constants.lightThemeTileColor : Constants.lightThemeSubtitle,
+                          inactiveColor: brightness == Brightness.light
+                              ? Constants.lightThemeTileColor
+                              : Constants.lightThemeSubtitle,
                           value: songCurrentPos,
                           onChanged: (value) async {
-                            await CustomAudioPlayer.assetsAudioPlayer.seek(Duration(seconds: value.toInt()));
+                            await CustomAudioPlayer.assetsAudioPlayer
+                                .seek(Duration(seconds: value.toInt()));
                           },
                         ),
                       ),
                       Expanded(
                           flex: 2,
                           child: Text(
-                            "${CustomAudioPlayer.songDuration?.inMinutes}:${((CustomAudioPlayer.songDuration?.inSeconds ?? 1) % 60).toString().padLeft(2,'0')}",
+                            "${CustomAudioPlayer.songDuration?.inMinutes}:${((CustomAudioPlayer.songDuration?.inSeconds ?? 1) % 60).toString().padLeft(2, '0')}",
                             textAlign: TextAlign.left,
                           )),
                     ],
                   );
-                },))
+                },
+              ))
         ],
       ),
     );

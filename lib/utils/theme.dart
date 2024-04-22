@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:delo_automotive/utils/constants.dart';
+import '../utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static StreamController<ThemeMode> currentThemeStream = StreamController.broadcast();
+  static StreamController<ThemeMode> currentThemeStream =
+      StreamController.broadcast();
   static ThemeMode currentTheme = ThemeMode.light;
 
   static void initStream() {
@@ -24,10 +25,16 @@ class AppTheme {
         ),
         listTileTheme: const ListTileThemeData(
             tileColor: Constants.lightThemeTileColor,
-            titleTextStyle:
-                TextStyle(color: Constants.lightThemeText, fontFamily: 'SF Pro', fontSize: 26, fontWeight: FontWeight.w400),
-            subtitleTextStyle:
-                TextStyle(color: Constants.lightThemeSubtitle, fontFamily: 'SF Pro', fontSize: 18, fontWeight: FontWeight.w400)),
+            titleTextStyle: TextStyle(
+                color: Constants.lightThemeText,
+                fontFamily: 'SF Pro',
+                fontSize: 26,
+                fontWeight: FontWeight.w400),
+            subtitleTextStyle: TextStyle(
+                color: Constants.lightThemeSubtitle,
+                fontFamily: 'SF Pro',
+                fontSize: 18,
+                fontWeight: FontWeight.w400)),
         iconTheme: const IconThemeData(
           color: Constants.lightThemeBlue,
         ),
@@ -42,10 +49,16 @@ class AppTheme {
         ),
         listTileTheme: const ListTileThemeData(
             tileColor: Constants.darkThemeTileColor,
-            titleTextStyle:
-                TextStyle(color: Constants.darkThemeText, fontFamily: 'SF Pro', fontSize: 26, fontWeight: FontWeight.w400),
-            subtitleTextStyle:
-                TextStyle(color: Constants.darkThemeSubtitle, fontFamily: 'SF Pro', fontSize: 18, fontWeight: FontWeight.w400)),
+            titleTextStyle: TextStyle(
+                color: Constants.darkThemeText,
+                fontFamily: 'SF Pro',
+                fontSize: 26,
+                fontWeight: FontWeight.w400),
+            subtitleTextStyle: TextStyle(
+                color: Constants.darkThemeSubtitle,
+                fontFamily: 'SF Pro',
+                fontSize: 18,
+                fontWeight: FontWeight.w400)),
         iconTheme: const IconThemeData(color: Constants.darkThemeBlue),
         disabledColor: Constants.darkThemeSubtitle);
   }

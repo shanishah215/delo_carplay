@@ -1,4 +1,4 @@
-import 'package:delo_automotive/screens/media_player.dart';
+import '../screens/media_player.dart';
 import 'package:flutter/material.dart';
 
 Widget categoryListTile(BuildContext context, {required String title}) {
@@ -9,7 +9,9 @@ Widget categoryListTile(BuildContext context, {required String title}) {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const MediaPlayer(continuePlaying: false,),
+              builder: (context) => const MediaPlayer(
+                continuePlaying: false,
+              ),
             ));
       },
       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),

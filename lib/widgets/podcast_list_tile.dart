@@ -1,4 +1,4 @@
-import 'package:delo_automotive/screens/media_player.dart';
+import '../screens/media_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -7,7 +7,13 @@ Widget podcastListTile(BuildContext context, {required String title}) {
     margin: const EdgeInsets.symmetric(vertical: 2),
     child: ListTile(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const MediaPlayer(continuePlaying: false,),));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MediaPlayer(
+                continuePlaying: false,
+              ),
+            ));
       },
       leading: Container(
           margin: const EdgeInsets.only(

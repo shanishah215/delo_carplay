@@ -1,8 +1,8 @@
-import 'package:delo_automotive/screens/media_player.dart';
-import 'package:delo_automotive/utils/constants.dart';
-import 'package:delo_automotive/utils/theme.dart';
-import 'package:delo_automotive/widgets/category_list_tile.dart';
-import 'package:delo_automotive/widgets/podcast_list_tile.dart';
+import '../screens/media_player.dart';
+import '../utils/constants.dart';
+import '../utils/theme.dart';
+import '../widgets/category_list_tile.dart';
+import '../widgets/podcast_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -71,7 +71,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           Constants.categorySelectedIcon,
                           height: 42,
                           colorFilter: ColorFilter.mode(
-                              tabController.index == 0 ? Theme.of(context).iconTheme.color! : Theme.of(context).disabledColor, BlendMode.srcIn),
+                              tabController.index == 0
+                                  ? Theme.of(context).iconTheme.color!
+                                  : Theme.of(context).disabledColor,
+                              BlendMode.srcIn),
                         ),
                         text: 'Kategorije',
                       ),
@@ -80,34 +83,43 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           Constants.podcastUnselectedIcon,
                           height: 42,
                           colorFilter: ColorFilter.mode(
-                              tabController.index == 1 ? Theme.of(context).iconTheme.color! : Theme.of(context).disabledColor, BlendMode.srcIn),
+                              tabController.index == 1
+                                  ? Theme.of(context).iconTheme.color!
+                                  : Theme.of(context).disabledColor,
+                              BlendMode.srcIn),
                         ),
                         text: 'Podkasti',
                       )
                     ],
                   ),
                 ),
-                Expanded(flex: 1,
-                    child: StreamBuilder(stream: AppTheme.currentThemeStream.stream,
+                Expanded(
+                    flex: 1,
+                    child: StreamBuilder(
+                      stream: AppTheme.currentThemeStream.stream,
                       builder: (context, themeSnapshot) {
                         ThemeMode theme = themeSnapshot.data ?? ThemeMode.light;
                         return Center(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MediaPlayer(continuePlaying: true,),
-                                ));
-                          },
-                          child: SvgPicture.asset(
-                            theme == ThemeMode.light ?  Constants.mediaPlayerLightTheme : Constants.mediaPlayerDarkTheme,
-                            height: 70,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MediaPlayer(
+                                      continuePlaying: true,
+                                    ),
+                                  ));
+                            },
+                            child: SvgPicture.asset(
+                              theme == ThemeMode.light
+                                  ? Constants.mediaPlayerLightTheme
+                                  : Constants.mediaPlayerDarkTheme,
+                              height: 70,
+                            ),
                           ),
-                        ),
-                      );
-                    },)
-                )
+                        );
+                      },
+                    ))
               ],
             )),
       ),
@@ -123,44 +135,64 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     shrinkWrap: true,
                     controller: categoryController,
                     itemCount: categoryList.length,
-                    padding: const EdgeInsets.only(left: 40, top: 10, bottom: 8),
+                    padding:
+                        const EdgeInsets.only(left: 40, top: 10, bottom: 8),
                     itemBuilder: (context, index) {
-                      return categoryListTile(context, title: categoryList[index]);
+                      return categoryListTile(context,
+                          title: categoryList[index]);
                     },
                   ),
                   ListView.builder(
                     controller: podcastController,
                     itemCount: categoryList.length,
-                    padding: const EdgeInsets.only(left: 40, top: 10, bottom: 8),
+                    padding:
+                        const EdgeInsets.only(left: 40, top: 10, bottom: 8),
                     itemBuilder: (context, index) {
-                      return podcastListTile(context, title: categoryList[index]);
+                      return podcastListTile(context,
+                          title: categoryList[index]);
                     },
                   ),
                 ],
               ),
             ),
-            Expanded(flex: 1,
+            Expanded(
+                flex: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     InkWell(
                         onTap: () => scrollUp(),
-                        child: Icon(Icons.keyboard_arrow_up_sharp, color: Theme.of(context).iconTheme.color, size: 64,)),
+                        child: Icon(
+                          Icons.keyboard_arrow_up_sharp,
+                          color: Theme.of(context).iconTheme.color,
+                          size: 64,
+                        )),
                     InkWell(
                         onTap: () => scrollDown(),
-                        child: Icon(Icons.keyboard_arrow_down_sharp, color: Theme.of(context).iconTheme.color, size: 64,)
-                    ),
+                        child: Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: Theme.of(context).iconTheme.color,
+                          size: 64,
+                        )),
                     StreamBuilder<ThemeMode>(
-                      stream: AppTheme.currentThemeStream.stream,
-                      builder: (context, themeSnapshot) {
-                        debugPrint("current icon $themeSnapshot");
-                        ThemeMode theme = themeSnapshot.data ?? ThemeMode.light;
-                        return InkWell(
-                            onTap: () => AppTheme.toggleTheme(themeMode: theme == ThemeMode.light ? ThemeMode.dark : ThemeMode.light),
-                            child: Icon(theme == ThemeMode.light ? Icons.dark_mode : Icons.light_mode, color: Theme.of(context).iconTheme.color, size: 44,)
-                        );
-                      }
-                    )
+                        stream: AppTheme.currentThemeStream.stream,
+                        builder: (context, themeSnapshot) {
+                          debugPrint("current icon $themeSnapshot");
+                          ThemeMode theme =
+                              themeSnapshot.data ?? ThemeMode.light;
+                          return InkWell(
+                              onTap: () => AppTheme.toggleTheme(
+                                  themeMode: theme == ThemeMode.light
+                                      ? ThemeMode.dark
+                                      : ThemeMode.light),
+                              child: Icon(
+                                theme == ThemeMode.light
+                                    ? Icons.dark_mode
+                                    : Icons.light_mode,
+                                color: Theme.of(context).iconTheme.color,
+                                size: 44,
+                              ));
+                        })
                   ],
                 ))
           ],
@@ -170,18 +202,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void scrollUp() {
-    if(tabController.index == 0){
-      categoryController.animateTo(categoryController.offset - 300, duration: const Duration(milliseconds: 500), curve: Curves.bounceInOut);
+    if (tabController.index == 0) {
+      categoryController.animateTo(categoryController.offset - 300,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.bounceInOut);
     } else {
-      podcastController.animateTo(podcastController.offset - 300, duration: const Duration(milliseconds: 500), curve: Curves.bounceInOut);
+      podcastController.animateTo(podcastController.offset - 300,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.bounceInOut);
     }
   }
 
   void scrollDown() {
-    if(tabController.index == 0){
-      categoryController.animateTo(categoryController.offset + 300, duration: const Duration(milliseconds: 500), curve: Curves.bounceInOut);
+    if (tabController.index == 0) {
+      categoryController.animateTo(categoryController.offset + 300,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.bounceInOut);
     } else {
-      podcastController.animateTo(podcastController.offset + 300, duration: const Duration(milliseconds: 500), curve: Curves.bounceInOut);
+      podcastController.animateTo(podcastController.offset + 300,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.bounceInOut);
     }
   }
 }

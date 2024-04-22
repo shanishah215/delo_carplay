@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:delo_automotive/carplay_template/CP_home.dart';
-import 'package:delo_automotive/repository/podcast_repo.dart';
-import 'package:delo_automotive/screens/home_screen.dart';
-import 'package:delo_automotive/screens/no_internet.dart';
-import 'package:delo_automotive/utils/theme.dart';
+import '../screens/home_screen.dart';
+import '../screens/no_internet.dart';
+import '../utils/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carplay/flutter_carplay.dart';
+
+import 'carplay_template/CP_home.dart';
+import '../repository/podcast_repo.dart';
 
 void main() {
   runApp(const MyApp());

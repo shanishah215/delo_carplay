@@ -275,7 +275,9 @@ class FlutterCarplay {
         template.runtimeType == CPListTemplate ||
         template.runtimeType == CPInformationTemplate ||
         template.runtimeType == CPPointOfInterestTemplate ||
-        template.runtimeType == CPNowPlayingTemplate
+        template.runtimeType == CPNowPlayingTemplate ||
+        template.runtimeType == CPTabBarTemplate
+
     ) {
       bool isCompleted = await _carPlayController
           .reactToNativeModule(FCPChannelTypes.pushTemplate, <String, dynamic>{

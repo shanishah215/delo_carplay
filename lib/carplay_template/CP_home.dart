@@ -53,65 +53,36 @@ class CarPlayTemplate {
 
       section2Items = [];
       section2Items.add(CPListSection(
-        items: podcastList != null
-            ? podcastList!.playlist!
-                .map((e) => CPListItem(
-                      text: e.title.toString(),
-                      detailText: e.description.toString(),
-                      // image: e.image,
-                      onPress: (complete, self) {
-                        openNowPlayingTemplate(e.title, e.description, e.duration?.toString(), e.link);
-                        complete();
-                      },
-                    ))
-                .toList()
-            : categoryList
-                .map((e) => CPListItem(
-                      text: 'Loading',
-                      detailText: "Detail Text",
-                      image: 'images/flutter_1080px.png',
-                      onPress: (complete, self) {
-                        openNowPlayingTemplate(null, null, null, null);
-                        complete();
-                      },
-                    ))
-                .toList(),
-      ));
-
-      // FlutterCarplay.setRootTemplate(
-      //   rootTemplate: CPTabBarTemplate(
-      //     templates: [
-      //       CPListTemplate(
-      //         sections: section1Items,
-      //         title: "Kategorije",
-      //         systemIcon: "list.bullet.below.rectangle",
-      //       ),
-      //       CPListTemplate(
-      //         sections: section2Items,
-      //         title: "Podkasti",
-      //         systemIcon: "play",
-      //       ),
-      //     ],
-      //   ),
-      //   animated: true,
-      // );
-      // FlutterCarplay.push(
-      //   template: CPListTemplate(
-      //       sections: section2Items,
-      //       title: "Podkasti",
-      //       systemIcon: "play",
-      //       backButton: CPBarButton(
-      //           title: "Back",
-      //           style: CPBarButtonStyles.none,
-      //           onPress: () {
-      //             FlutterCarplay.pop(animated: true);
-      //     },
-      //   )
-      //     ),
-      //   animated: true,
-      // );
-
-      // flutterCarplay.forceUpdateRootTemplate();
+          items:
+              // podcastList != null?
+              podcastList!.playlist!
+                  .map((e) => CPListItem(
+                        text: e.title.toString(),
+                        detailText: e.description.toString(),
+                        onPress: (complete, self) {
+                          openNowPlayingTemplate(
+                              e.title,
+                              e.description,
+                              e.duration?.toString(),
+                              "https://www.delo.si/play/2117622?premium=64483302",
+                              e.image);
+                          complete();
+                        },
+                      ))
+                  .toList()
+          // : categoryList
+          //     .map((e) => CPListItem(
+          //           text: 'Loading',
+          //           detailText: "Detail Text",
+          //           image: 'images/flutter_1080px.png',
+          //           onPress: (complete, self) {
+          //             openNowPlayingTemplate(null, null, null, null, null);
+          //             complete();
+          //           },
+          //         ))
+          //     .toList(),
+          ));
+      showPodcastList();
     });
   }
 
@@ -122,33 +93,7 @@ class CarPlayTemplate {
             .map((e) => CPListItem(
                   text: e.title,
                   onPress: (complete, self) {
-                    // updatePodcastList(e.contentId);
-                    // pushToPodcastList();
-                    FlutterCarplay.setRootTemplate(
-                      rootTemplate: CPTabBarTemplate(
-                        templates: [
-                          CPListTemplate(
-                            backButton: CPBarButton(
-                              title: "Back",
-                              style: CPBarButtonStyles.none,
-                              onPress: () {
-                                initCarPlay();
-                              },
-                            ),
-                            sections: section2Items,
-                            title: "Kategorije",
-                            systemIcon: "list.bullet.below.rectangle",
-                          ),
-                          // CPListTemplate(
-                          //   sections: section2Items,
-                          //   title: "Podkasti",
-                          //   systemIcon: "play",
-                          // ),
-                        ],
-                      ),
-                      animated: true,
-                    );
-                    flutterCarplay.forceUpdateRootTemplate();
+                    updatePodcastList(e.contentId);
                     complete();
                   },
                 ))
@@ -162,9 +107,13 @@ class CarPlayTemplate {
               .map((e) => CPListItem(
                     text: e.title.toString(),
                     detailText: e.description.toString(),
-                    // image: e.image,
                     onPress: (complete, self) {
-                      openNowPlayingTemplate(e.title, e.description, e.duration?.toString(), e.link);
+                      openNowPlayingTemplate(
+                          e.title,
+                          e.description,
+                          e.duration?.toString(),
+                          "https://www.delo.si/play/2117622?premium=64483302",
+                          e.image);
                       complete();
                     },
                   ))
@@ -175,32 +124,51 @@ class CarPlayTemplate {
                     detailText: "Detail Text",
                     image: 'images/flutter_1080px.png',
                     onPress: (complete, self) {
-                      openNowPlayingTemplate(null, null, null, null);
+                      openNowPlayingTemplate(null, null, null, null, null);
                       complete();
                     },
                   ))
               .toList(),
     ));
 
+    createCategoryList();
+    flutterCarplay.addListenerOnConnectionChange(onCarplayConnectionChange);
+  }
+
+  createCategoryList() {
     FlutterCarplay.setRootTemplate(
       rootTemplate: CPTabBarTemplate(
         templates: [
           CPListTemplate(
-            sections: section1Items,
-            title: "Kategorije",
-            systemIcon: "list.bullet.below.rectangle",
-          ),
-          // CPListTemplate(
-          //   sections: section2Items,
-          //   title: "Podkasti",
-          //   systemIcon: "play",
-          // ),
+              sections: section1Items,
+              title: "Kategorije",
+              systemIcon: "list.bullet.below.rectangle",
+              trailingButton: [CPBarButton(onPress: () {}, style: CPBarButtonStyles.rounded, title: "title")]),
         ],
       ),
       animated: true,
     );
     flutterCarplay.forceUpdateRootTemplate();
-    flutterCarplay.addListenerOnConnectionChange(onCarplayConnectionChange);
+  }
+
+  showPodcastList() {
+    FlutterCarplay.push(
+      animated: true,
+      template: CPListTemplate(
+          sections: section2Items,
+          backButton: CPBarButton(
+            title: "",
+            style: CPBarButtonStyles.none,
+            onPress: () {
+              FlutterCarplay.pop(animated: true);
+            },
+          ),
+          showsTabBadge: true,
+          title: "Podkasti",
+          systemIcon: "play",
+          emptyViewTitleVariants: ["Loading"],
+          emptyViewSubtitleVariants: ["Please wait..."]),
+    );
   }
 
   disposeCarplay() {
@@ -208,10 +176,7 @@ class CarPlayTemplate {
   }
 
   void onCarplayConnectionChange(CPConnectionStatusTypes status) {
-    // Do things when carplay state is connected, background or disconnected
-    // setState(() {
     connectionStatus = status;
-    // });
   }
 
   void addNewTemplate(CPListTemplate newTemplate) {
@@ -239,110 +204,27 @@ class CarPlayTemplate {
     flutterCarplay.forceUpdateRootTemplate();
   }
 
-  void openNowPlayingTemplate(String? title, String? artist, String? duration, String? link) {
+  void openNowPlayingTemplate(String? title, String? artist, String? duration,
+      String? link, String? img) {
     FlutterCarplay.push(
-        template: CPNowPlayingTemplate(title: 'Now Playing title')
-    );
-    playMusic(title, artist, duration, link);
+        template: CPNowPlayingTemplate(title: 'Now Playing title'));
+    playMusic(title, artist, duration, link, img);
   }
 
   // Method to invoke platform channel to play music
-  void playMusic(String? title, String? artist, String? duration, String? link) async {
+  void playMusic(String? title, String? artist, String? duration, String? link,
+      String? img) async {
     const platform = MethodChannel('music_player');
     try {
-      await platform
-          .invokeMethod('playMusic', {
-            'title': title, 
-            'artist': artist,
-            'duration': duration,
-            'link': link
-            }
-          );
+      await platform.invokeMethod('playMusic', {
+        'title': title,
+        'artist': artist,
+        'duration': duration,
+        'link': link,
+        'img': img
+      });
     } on PlatformException catch (e) {
       print("Failed to play music: '${e.message}'.");
     }
-  }
-
-  void pushToPodcastList() {
-    FlutterCarplay.push(
-      template: CPTabBarTemplate(
-        templates: [
-          CPListTemplate(
-            sections: section2Items,
-            title: "Kategorije",
-            systemIcon: "list.bullet.below.rectangle",
-          ),
-        ],
-      ),
-    );
-  }
-
-  void openGridTemplate() {
-    FlutterCarplay.push(
-      template: CPGridTemplate(
-        title: "Grid Template",
-        buttons: [
-          for (var i = 1; i < 9; i++)
-            CPGridButton(
-              titleVariants: ["Item $i"],
-              // ----- TRADEMARKS RIGHTS INFORMATION BEGIN -----
-              // The official Flutter logo is used from the link below.
-              // For more information, please visit and read
-              // Flutter Brand Guidelines Website: https://flutter.dev/brand
-              //
-              // FLUTTER AND THE RELATED LOGO ARE TRADEMARKS OF Google LLC.
-              // WE ARE NOT ENDORSED BY OR AFFILIATED WITH Google LLC.
-              // ----- TRADEMARKS RIGHTS INFORMATION END -----
-              image: 'images/logo_flutter_1080px_clr.png',
-              onPress: () {
-                print("Grid Button $i pressed");
-              },
-            ),
-        ],
-      ),
-      animated: true,
-    );
-  }
-
-  void openListTemplate() {
-    FlutterCarplay.push(
-      template: CPListTemplate(
-        sections: [
-          CPListSection(
-            header: "A Section",
-            items: [
-              CPListItem(text: "Item 1"),
-              CPListItem(text: "Item 2"),
-              CPListItem(text: "Item 3"),
-              CPListItem(text: "Item 4"),
-            ],
-          ),
-          CPListSection(
-            header: "B Section",
-            items: [
-              CPListItem(text: "Item 5"),
-              CPListItem(text: "Item 6"),
-            ],
-          ),
-          CPListSection(
-            header: "C Section",
-            items: [
-              CPListItem(text: "Item 7"),
-              CPListItem(text: "Item 8"),
-            ],
-          ),
-        ],
-        systemIcon: "systemIcon",
-        title: "List Template",
-        backButton: CPBarButton(
-          title: "Back",
-          style: CPBarButtonStyles.none,
-          onPress: () {
-            FlutterCarplay.pop(animated: true);
-          },
-        ),
-      ),
-      animated: true,
-    );
   }
 }

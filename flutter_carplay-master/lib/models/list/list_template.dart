@@ -58,6 +58,10 @@ class CPListTemplate {
   /// Back button object
   final CPBarButton? backButton;
 
+  // 
+  final List<CPBarButton>? trailingButton;
+
+
   /// Creates [CPListTemplate] to display a list of items, grouped into one or more sections.
   /// Each section contains an array of list items — objects that is [CPListItem]
   ///
@@ -70,6 +74,7 @@ class CPListTemplate {
     this.showsTabBadge = false,
     required this.systemIcon,
     this.backButton,
+    this.trailingButton
   });
 
   Map<String, dynamic> toJson() => {
@@ -81,6 +86,7 @@ class CPListTemplate {
         "showsTabBadge": showsTabBadge,
         "systemIcon": systemIcon,
         "backButton": backButton?.toJson(),
+        "trailingButton": trailingButton
       };
 
   String get uniqueId {

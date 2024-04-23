@@ -51,7 +51,9 @@ public class SwiftMusicPlayerPlugin: NSObject {
             case "playMusic":
                 let params = call.arguments as? [String: Any]
                 print(params)
-                self.playMusic(params: params ?? [:])
+                Task {
+                    await self.playMusic(params: params ?? [:])
+                }
                 
                 break;
             default: result(FlutterMethodNotImplemented)
@@ -60,15 +62,35 @@ public class SwiftMusicPlayerPlugin: NSObject {
     }
 
     var player = AVPlayer()
-    private func playMusic(params: [String: Any]) {
+    private func playMusic(params: [String: Any]) async {
 
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-            MPMediaItemPropertyTitle: params["title"] as? String ?? "undefined",
-            MPMediaItemPropertyArtist: params["artist"] as? String ?? "undefined",
-            MPMediaItemPropertyGenre: "",
-            MPMediaItemPropertyPlaybackDuration: params["duration"] as? String ?? "",
-            MPMediaItemPropertyAssetURL: params["link"] as? String ?? ""
-        ]
+        if let imageUrlString = params["img"] as? String, let imageUrl = URL(string: imageUrlString) {
+            Task.init {
+                do {
+                    let (data, response) = try await URLSession.shared.data(from: imageUrl)
+                    let imageData = data
+                    if let image = UIImage(data: imageData) {
+                        let coverArt = MPMediaItemArtwork(image: image)
+                        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+                            MPMediaItemPropertyArtwork: coverArt,
+                            MPMediaItemPropertyTitle: params["title"] as? String ?? "undefined",
+                            MPMediaItemPropertyArtist: params["artist"] as? String ?? "undefined",
+                            MPMediaItemPropertyGenre: "",
+                            MPMediaItemPropertyPlaybackDuration: params["duration"] as? String ?? "",
+                            MPMediaItemPropertyAssetURL: params["link"] as? String ?? ""
+                        ]
+                    } else {
+                        print("Failed to create UIImage from data")
+                    }
+                } catch {
+                    print("Error loading image data: \(error)")
+                }
+            }
+        } else {
+            print("Invalid image URL")
+        }
+
+
 
         //        CPNowPlayingTemplate.shared.isAlbumArtistButtonEnabled = true
         //        MPMusicPlayerController.applicationQueuePlayer.setQueue(with: ["yjhT3QRS"])

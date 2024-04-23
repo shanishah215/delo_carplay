@@ -18,6 +18,7 @@ class FCPListTemplate {
   private var emptyViewTitleVariants: [String] = []
   private var emptyViewSubtitleVariants: [String] = []
   private var showsTabBadge: Bool = false
+  private var trailingButton: [CPBarButton] = []
   private var templateType: FCPListTemplateTypes
   private var objcBackButton: FCPBarButton?
   private var backButton: CPBarButton?
@@ -30,6 +31,7 @@ class FCPListTemplate {
     self.emptyViewSubtitleVariants = obj["emptyViewSubtitleVariants"] as? [String] ?? []
     self.showsTabBadge = obj["showsTabBadge"] as! Bool
     self.templateType = templateType 
+    self.trailingButton = obj["trailingButton"] as? [CPBarButton] ?? []
     self.objcSections = (obj["sections"] as! Array<[String : Any]>).map {
       FCPListSection(obj: $0)
     }
@@ -52,6 +54,7 @@ class FCPListTemplate {
     if (templateType == FCPListTemplateTypes.DEFAULT) {
       listTemplate.backButton = self.backButton
     }
+      listTemplate.trailingNavigationBarButtons = trailingButton
     self._super = listTemplate
     return listTemplate
   }

@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+
 import '../repository/podcast_list_model.dart';
 import '../repository/podcast_menu_model.dart';
 import '../repository/podcast_repo.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
+import 'package:flutter/services.dart';
 
 CPConnectionStatusTypes connectionStatus = CPConnectionStatusTypes.unknown;
 final FlutterCarplay flutterCarplay = FlutterCarplay();
@@ -57,7 +60,7 @@ class CarPlayTemplate {
                       detailText: e.description.toString(),
                       // image: e.image,
                       onPress: (complete, self) {
-                        openNowPlayingTemplate();
+                        openNowPlayingTemplate(e.title, e.description, e.duration?.toString(), e.link);
                         complete();
                       },
                     ))
@@ -68,7 +71,7 @@ class CarPlayTemplate {
                       detailText: "Detail Text",
                       image: 'images/flutter_1080px.png',
                       onPress: (complete, self) {
-                        openNowPlayingTemplate();
+                        openNowPlayingTemplate(null, null, null, null);
                         complete();
                       },
                     ))
@@ -161,7 +164,7 @@ class CarPlayTemplate {
                     detailText: e.description.toString(),
                     // image: e.image,
                     onPress: (complete, self) {
-                      openNowPlayingTemplate();
+                      openNowPlayingTemplate(e.title, e.description, e.duration?.toString(), e.link);
                       complete();
                     },
                   ))
@@ -172,7 +175,7 @@ class CarPlayTemplate {
                     detailText: "Detail Text",
                     image: 'images/flutter_1080px.png',
                     onPress: (complete, self) {
-                      openNowPlayingTemplate();
+                      openNowPlayingTemplate(null, null, null, null);
                       complete();
                     },
                   ))
@@ -236,9 +239,28 @@ class CarPlayTemplate {
     flutterCarplay.forceUpdateRootTemplate();
   }
 
-  void openNowPlayingTemplate() {
+  void openNowPlayingTemplate(String? title, String? artist, String? duration, String? link) {
     FlutterCarplay.push(
-        template: CPNowPlayingTemplate(title: 'Now Playing title'));
+        template: CPNowPlayingTemplate(title: 'Now Playing title')
+    );
+    playMusic(title, artist, duration, link);
+  }
+
+  // Method to invoke platform channel to play music
+  void playMusic(String? title, String? artist, String? duration, String? link) async {
+    const platform = MethodChannel('music_player');
+    try {
+      await platform
+          .invokeMethod('playMusic', {
+            'title': title, 
+            'artist': artist,
+            'duration': duration,
+            'link': link
+            }
+          );
+    } on PlatformException catch (e) {
+      print("Failed to play music: '${e.message}'.");
+    }
   }
 
   void pushToPodcastList() {

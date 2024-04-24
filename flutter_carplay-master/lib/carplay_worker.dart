@@ -151,6 +151,7 @@ class FlutterCarplay {
     if (rootTemplate.runtimeType == CPTabBarTemplate ||
         rootTemplate.runtimeType == CPGridTemplate ||
         rootTemplate.runtimeType == CPListTemplate ||
+        rootTemplate.runtimeType == CPBarButton ||
         rootTemplate.runtimeType == CPInformationTemplate ||
         rootTemplate.runtimeType == CPNowPlayingTemplate ||
         rootTemplate.runtimeType == CPPointOfInterestTemplate) {

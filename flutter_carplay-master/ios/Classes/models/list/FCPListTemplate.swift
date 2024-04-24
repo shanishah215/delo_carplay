@@ -31,7 +31,15 @@ class FCPListTemplate {
     self.emptyViewSubtitleVariants = obj["emptyViewSubtitleVariants"] as? [String] ?? []
     self.showsTabBadge = obj["showsTabBadge"] as! Bool
     self.templateType = templateType 
-    self.trailingButton = obj["trailingButton"] as? [CPBarButton] ?? []
+      if let data = obj["trailingButton"] as? Array<[String : Any]>? {
+          if data != nil {
+              self.trailingButton = data!.map{
+                  FCPBarButton(obj: $0).get
+              }
+          } else {
+              self.trailingButton = []
+          }
+      }
     self.objcSections = (obj["sections"] as! Array<[String : Any]>).map {
       FCPListSection(obj: $0)
     }
@@ -54,7 +62,7 @@ class FCPListTemplate {
     if (templateType == FCPListTemplateTypes.DEFAULT) {
       listTemplate.backButton = self.backButton
     }
-      listTemplate.trailingNavigationBarButtons = trailingButton
+    listTemplate.trailingNavigationBarButtons = trailingButton
     self._super = listTemplate
     return listTemplate
   }

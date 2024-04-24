@@ -32,6 +32,8 @@ class FCPBarButton {
       }
     })
     barButton.buttonStyle = self.style
+      barButton.isEnabled = true
+      barButton.image = UIImage(systemName: "play")
     self._super = barButton
     return barButton
   }

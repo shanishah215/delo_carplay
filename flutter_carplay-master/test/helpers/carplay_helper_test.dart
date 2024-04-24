@@ -13,6 +13,7 @@ void main() {
         sections: [
           CPListSection(items: [cpListItem])
         ],
+        trailingButton: [],
         systemIcon: '<CarIcon>');
 
     final templates = [

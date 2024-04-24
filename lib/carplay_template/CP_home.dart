@@ -17,18 +17,6 @@ class CarPlayTemplate {
   List<CPListSection> section1Items = [];
   List<CPListSection> section2Items = [];
 
-  CPListTemplate firstTab = CPListTemplate(
-    sections: [],
-    title: "Kategorije",
-    systemIcon: "list.bullet.below.rectangle",
-  );
-
-  CPListTemplate secondTab = CPListTemplate(
-    sections: [],
-    title: "Podkasti",
-    systemIcon: "play",
-  );
-
   CPListTemplate? selectedTemplate;
 
   List<String> categoryList = [
@@ -140,10 +128,18 @@ class CarPlayTemplate {
       rootTemplate: CPTabBarTemplate(
         templates: [
           CPListTemplate(
-              sections: section1Items,
-              title: "Kategorije",
-              systemIcon: "list.bullet.below.rectangle",
-              trailingButton: [CPBarButton(onPress: () {}, style: CPBarButtonStyles.rounded, title: "title")]),
+            trailingButton: [
+              CPBarButton(
+                  onPress: () {
+                    FlutterCarplay.pop(animated: true);
+                  },
+                  style: CPBarButtonStyles.rounded,
+                  title: "1st page")
+            ],
+            sections: section1Items,
+            title: "Kategorije",
+            systemIcon: "list.bullet.below.rectangle",
+          )
         ],
       ),
       animated: true,
@@ -155,6 +151,20 @@ class CarPlayTemplate {
     FlutterCarplay.push(
       animated: true,
       template: CPListTemplate(
+          trailingButton: [
+            CPBarButton(
+                onPress: () {
+                  // print("2nd");
+                  // FlutterCarplay.pop(animated: true);
+                  // FlutterCarplay.push(
+                  //     template: CPListTemplate(
+                  //         sections: [CPListSection(header: 'empty', items: [CPListItem(text: 'Hello')])],
+                  //         systemIcon: 'play',
+                  //         trailingButton: []));
+                },
+                style: CPBarButtonStyles.none,
+                title: "2nd"),
+          ],
           sections: section2Items,
           backButton: CPBarButton(
             title: "",

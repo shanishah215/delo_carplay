@@ -63,7 +63,7 @@ public class SwiftMusicPlayerPlugin: NSObject {
 
     var player = AVPlayer()
     private func playMusic(params: [String: Any]) async {
-
+        player.volume = 0.6;
         if let imageUrlString = params["img"] as? String, let imageUrl = URL(string: imageUrlString) {
             Task.init {
                 do {
@@ -79,6 +79,9 @@ public class SwiftMusicPlayerPlugin: NSObject {
                             MPMediaItemPropertyPlaybackDuration: params["duration"] as? String ?? "",
                             MPMediaItemPropertyAssetURL: params["link"] as? String ?? ""
                         ]
+                        Task {
+                            await player.play()
+                        }
                     } else {
                         print("Failed to create UIImage from data")
                     }

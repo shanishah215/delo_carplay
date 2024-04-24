@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "delo_carplay",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "delo_carplay (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "delo_carplay (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug"
+        },
+        {
+            "name": "delo_carplay (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter_carplay-master",
+            "cwd": "flutter_carplay-master",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_carplay-master (profile mode)",
+            "cwd": "flutter_carplay-master",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_carplay-master (release mode)",
+            "cwd": "flutter_carplay-master",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

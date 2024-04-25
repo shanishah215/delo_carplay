@@ -1,3 +1,4 @@
+
 import UIKit
 import Flutter
 import Foundation
@@ -50,7 +51,7 @@ public class SwiftMusicPlayerPlugin: NSObject {
             switch(call.method) {
             case "playMusic":
                 let params = call.arguments as? [String: Any]
-                print(params)
+//                print(params)
                 Task {
                     await self.playMusic(params: params ?? [:])
                 }
@@ -63,25 +64,36 @@ public class SwiftMusicPlayerPlugin: NSObject {
 
     var player = AVPlayer()
     private func playMusic(params: [String: Any]) async {
+//        print("**** DATA:: params[link]:: ", params["link"])
+//        print("**** DATA:: params[duration]:: ", params["duration"])
+        let playerItem = AVPlayerItem(url: URL(string: params["link"] as? String ?? "")!)
+        player = AVPlayer(playerItem: playerItem)
         player.volume = 0.6;
+        player.allowsExternalPlayback = false
+
         if let imageUrlString = params["img"] as? String, let imageUrl = URL(string: imageUrlString) {
             Task.init {
                 do {
                     let (data, response) = try await URLSession.shared.data(from: imageUrl)
                     let imageData = data
+                    var nowPlayingInfo: [String: Any] = [:]
                     if let image = UIImage(data: imageData) {
-                        let coverArt = MPMediaItemArtwork(image: image)
-                        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+                        let coverArt = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { size -> UIImage in
+                            return image
+                         })
+                         nowPlayingInfo = [
                             MPMediaItemPropertyArtwork: coverArt,
                             MPMediaItemPropertyTitle: params["title"] as? String ?? "undefined",
                             MPMediaItemPropertyArtist: params["artist"] as? String ?? "undefined",
                             MPMediaItemPropertyGenre: "",
-                            MPMediaItemPropertyPlaybackDuration: params["duration"] as? String ?? "",
+                            MPMediaItemPropertyPlaybackDuration: "4",
+//                                params["duration"] as? String ?? "",
                             MPMediaItemPropertyAssetURL: params["link"] as? String ?? ""
                         ]
                         Task {
                             await player.play()
                         }
+                        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
                     } else {
                         print("Failed to create UIImage from data")
                     }

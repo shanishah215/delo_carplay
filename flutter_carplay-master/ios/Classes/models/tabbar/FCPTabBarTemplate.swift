@@ -18,7 +18,7 @@ class FCPTabBarTemplate {
     self.elementId = obj["_elementId"] as! String
     self.title = obj["title"] as? String
     self.objcTemplates = (obj["templates"] as! Array<[String: Any]>).map {
-      FCPListTemplate(obj: $0, templateType: FCPListTemplateTypes.PART_OF_GRID_TEMPLATE)
+        FCPListTemplate(obj: $0, templateType: FCPListTemplateTypes.PART_OF_GRID_TEMPLATE)
     }
     self.templates = self.objcTemplates.map {
       $0.get

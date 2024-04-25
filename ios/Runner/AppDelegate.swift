@@ -40,6 +40,13 @@ let flutterEngine = FlutterEngine(name: "SharedEngine", project: nil, allowHeadl
         MPRemoteCommandCenter.shared().pauseCommand.addTarget { event in
           return .success
         }
+        
+        MPRemoteCommandCenter.shared().changePlaybackPositionCommand.isEnabled = true
+        MPRemoteCommandCenter.shared().changePlaybackPositionCommand.addTarget { event in
+          return .success
+        }
+        
+
       }
 }
 
@@ -69,7 +76,8 @@ public class SwiftMusicPlayerPlugin: NSObject {
         let playerItem = AVPlayerItem(url: URL(string: params["link"] as? String ?? "")!)
         player = AVPlayer(playerItem: playerItem)
         player.volume = 0.6;
-        player.allowsExternalPlayback = false
+        player.allowsExternalPlayback = true
+        player.usesExternalPlaybackWhileExternalScreenIsActive = true
 
         if let imageUrlString = params["img"] as? String, let imageUrl = URL(string: imageUrlString) {
             Task.init {
@@ -94,6 +102,7 @@ public class SwiftMusicPlayerPlugin: NSObject {
                             await player.play()
                         }
                         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+                        MPPlayableContentManager.shared().nowPlayingIdentifiers = []
                     } else {
                         print("Failed to create UIImage from data")
                     }

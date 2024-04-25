@@ -17,21 +17,18 @@ private var systemIcon: String
   
  var get: CPNowPlayingTemplate {
      let nowPlayingTemplate = CPNowPlayingTemplate.shared
-     nowPlayingTemplate.tabImage = UIImage(systemName: systemIcon)
+//     nowPlayingTemplate.tabImage = UIImage(systemName: systemIcon)
      nowPlayingTemplate.tabTitle = "Song Title"
      nowPlayingTemplate.userInfo = "Description of podcast"
-//     nowPlayingTemplate.isUpNextButtonEnabled = true
-//     nowPlayingTemplate.observationInfo = "Observation"
+
      nowPlayingTemplate.updateNowPlayingButtons(
-      [CPNowPlayingButton(), 
-      CPNowPlayingImageButton(), 
+        [
+//            CPNowPlayingButton(),
+      CPNowPlayingImageButton(),
       CPNowPlayingMoreButton(), 
       CPNowPlayingShuffleButton(), 
       CPNowPlayingAddToLibraryButton()])
-     
-      
-//     nowPlayingTemplate.accessibilityAttributedHint = NSAttributedString(string: "Here String ")
-//     nowPlayingTemplate.accessibilityAttributedLabel = NSAttributedString(string: "Attribute Lable")
+
      self._super = nowPlayingTemplate
      return nowPlayingTemplate
  }

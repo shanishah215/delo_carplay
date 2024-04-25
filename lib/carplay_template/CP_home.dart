@@ -36,7 +36,7 @@ class CarPlayTemplate {
 
   updatePodcastList(String id) async {
     await PodcastRepository().getPodcastList(id).then((value) {
-      print('podcast list length ${value!.playlist!.length}');
+      // print('podcast list length ${value!.playlist!.length}');
       podcastList = value;
 
       section2Items = [];
@@ -154,13 +154,13 @@ class CarPlayTemplate {
           trailingButton: [
             CPBarButton(
                 onPress: () {
-                  // print("2nd");
-                  // FlutterCarplay.pop(animated: true);
-                  // FlutterCarplay.push(
-                  //     template: CPListTemplate(
-                  //         sections: [CPListSection(header: 'empty', items: [CPListItem(text: 'Hello')])],
-                  //         systemIcon: 'play',
-                  //         trailingButton: []));
+                  print("2nd");
+                  FlutterCarplay.pop(animated: true);
+                  FlutterCarplay.push(
+                      template: CPListTemplate(
+                          sections: [CPListSection(header: 'empty', items: [CPListItem(text: 'Hello')])],
+                          systemIcon: 'play',
+                          trailingButton: []));
                 },
                 style: CPBarButtonStyles.none,
                 title: "2nd"),
@@ -187,31 +187,6 @@ class CarPlayTemplate {
 
   void onCarplayConnectionChange(CPConnectionStatusTypes status) {
     connectionStatus = status;
-  }
-
-  void addNewTemplate(CPListTemplate newTemplate) {
-    final currentRootTemplate = FlutterCarplay.rootTemplate!;
-
-    currentRootTemplate.templates.add(newTemplate);
-
-    FlutterCarplay.setRootTemplate(
-      rootTemplate: currentRootTemplate,
-      animated: true,
-    );
-    flutterCarplay.forceUpdateRootTemplate();
-  }
-
-  void removeLastTemplate() {
-    final currentRootTemplate = FlutterCarplay.rootTemplate!;
-
-    currentRootTemplate.templates.remove(currentRootTemplate.templates.last);
-
-    FlutterCarplay.setRootTemplate(
-      rootTemplate: currentRootTemplate,
-      animated: true,
-    );
-
-    flutterCarplay.forceUpdateRootTemplate();
   }
 
   void openNowPlayingTemplate(String? title, String? artist, String? duration,

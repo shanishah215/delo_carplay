@@ -33,7 +33,6 @@ class PodcastRepository {
         "https://cdn.jwplayer.com/v2/playlists/$categoryID?format=json";
     try {
       http.Response response = await http.get(Uri.parse(url));
-      // debugPrint("podcast List ${response.body}");
       if (response.statusCode == 200) {
         final podcastJson = jsonDecode(response.body) as Map<String, dynamic>;
         podcastData = PodcastListData.fromJson(podcastJson);

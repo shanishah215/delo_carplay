@@ -1,8 +1,9 @@
+import 'package:delo_automotive/main.dart';
+
 import '../screens/media_player.dart';
 import '../utils/constants.dart';
 import '../utils/theme.dart';
 import '../widgets/category_list_tile.dart';
-import '../widgets/podcast_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ScrollController categoryController = ScrollController();
-  ScrollController podcastController = ScrollController();
 
   List<String> categoryList = [
     'Najnovejši podkasti',
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 1, vsync: this, initialIndex: 0);
   }
 
   @override
@@ -65,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     labelColor: Theme.of(context).iconTheme.color,
                     unselectedLabelColor: Constants.lightThemeSubtitle,
                     indicatorColor: Theme.of(context).canvasColor,
+                    dividerHeight: 0,
                     tabs: [
                       Tab(
                         icon: SvgPicture.asset(
@@ -78,18 +79,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                         text: 'Kategorije',
                       ),
-                      Tab(
-                        icon: SvgPicture.asset(
-                          Constants.podcastUnselectedIcon,
-                          height: 42,
-                          colorFilter: ColorFilter.mode(
-                              tabController.index == 1
-                                  ? Theme.of(context).iconTheme.color!
-                                  : Theme.of(context).disabledColor,
-                              BlendMode.srcIn),
-                        ),
-                        text: 'Podkasti',
-                      )
                     ],
                   ),
                 ),
@@ -105,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const MediaPlayer(
+                                    builder: (context) => MediaPlayer(
                                       continuePlaying: true,
                                     ),
                                   ));
@@ -134,22 +123,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ListView.builder(
                     shrinkWrap: true,
                     controller: categoryController,
-                    itemCount: categoryList.length,
+                    itemCount: podcastCategories.length,
                     padding:
                         const EdgeInsets.only(left: 40, top: 10, bottom: 8),
                     itemBuilder: (context, index) {
                       return categoryListTile(context,
-                          title: categoryList[index]);
-                    },
-                  ),
-                  ListView.builder(
-                    controller: podcastController,
-                    itemCount: categoryList.length,
-                    padding:
-                        const EdgeInsets.only(left: 40, top: 10, bottom: 8),
-                    itemBuilder: (context, index) {
-                      return podcastListTile(context,
-                          title: categoryList[index]);
+                          title: podcastCategories[index].title, categoryID: podcastCategories[index].contentId);
                     },
                   ),
                 ],
@@ -202,26 +181,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void scrollUp() {
-    if (tabController.index == 0) {
       categoryController.animateTo(categoryController.offset - 300,
           duration: const Duration(milliseconds: 500),
           curve: Curves.bounceInOut);
-    } else {
-      podcastController.animateTo(podcastController.offset - 300,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.bounceInOut);
-    }
   }
 
   void scrollDown() {
-    if (tabController.index == 0) {
       categoryController.animateTo(categoryController.offset + 300,
           duration: const Duration(milliseconds: 500),
           curve: Curves.bounceInOut);
-    } else {
-      podcastController.animateTo(podcastController.offset + 300,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.bounceInOut);
-    }
   }
 }

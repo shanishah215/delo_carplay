@@ -82,17 +82,17 @@ class Playlist {
 
   Playlist(
       {this.title,
-      this.mediaid,
-      this.link,
-      this.image,
-      this.images,
-      this.feedid,
-      this.duration,
-      this.pubdate,
-      this.description,
-      this.tags,
-      this.sources,
-      this.tracks});
+        this.mediaid,
+        this.link,
+        this.image,
+        this.images,
+        this.feedid,
+        this.duration,
+        this.pubdate,
+        this.description,
+        this.tags,
+        this.sources,
+        this.tracks});
 
   Playlist.fromJson(Map<String, dynamic> json) {
     title = json['title'];

@@ -9,11 +9,11 @@ class PodcastMenuModel {
 
   factory PodcastMenuModel.fromJson(Map data) {
     return PodcastMenuModel(
-      contentId: data['contentId'].toString(),
-      enableText: data['enableText'],
-      featured: data['featured'],
-      title: data['title'].toString(),
-      type: data['type'].toString()
+        contentId: data['contentId'].toString(),
+        enableText: data['enableText'],
+        featured: data['featured'],
+        title: data['title'].toString(),
+        type: data['type'].toString()
     );
   }
 

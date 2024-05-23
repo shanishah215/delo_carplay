@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:delo_automotive/repository/podcast_list_model.dart';
 import '../screens/no_internet.dart';
 import '../utils/custom_audio_player.dart';
 import '../utils/constants.dart';
@@ -6,8 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MediaPlayer extends StatefulWidget {
-  const MediaPlayer({super.key, required this.continuePlaying});
+  MediaPlayer({super.key, required this.continuePlaying, this.playlist});
   final bool continuePlaying;
+  Playlist? playlist;
 
   @override
   State<MediaPlayer> createState() => _MediaPlayerState();

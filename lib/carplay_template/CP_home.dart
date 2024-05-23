@@ -1,17 +1,10 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-
-import '../repository/podcast_list_model.dart';
-import '../repository/podcast_menu_model.dart';
+import 'package:delo_automotive/main.dart';
 import '../repository/podcast_repo.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 import 'package:flutter/services.dart';
 
 CPConnectionStatusTypes connectionStatus = CPConnectionStatusTypes.unknown;
 final FlutterCarplay flutterCarplay = FlutterCarplay();
-List<PodcastMenuModel> podcastCategories = [];
-PodcastListData? podcastList;
 
 class CarPlayTemplate {
   List<CPListSection> section1Items = [];

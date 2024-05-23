@@ -29,15 +29,18 @@ class _MediaPlayerState extends State<MediaPlayer> {
   }
 
   Future<void> initAudioPlayer() async {
-    await CustomAudioPlayer.initAudioPlayer().then((value) async {
-      CustomAudioPlayer.podcastName = widget.playlist?.title.toString() ?? "";
-      CustomAudioPlayer.podcastDetails = widget.playlist?.description.toString() ?? "";
-      CustomAudioPlayer.podcastImage = widget.playlist?.images?[0].src ?? "";
-      CustomAudioPlayer.categoryName = widget.categoryName ?? "";
+    Sources? source = widget.playlist?.sources?.where((element) => element.label == "AAC Audio").toList()[0];
+    if(source != null) {
+      await CustomAudioPlayer.initAudioPlayer(source.file ?? "").then((value) async {
+        CustomAudioPlayer.podcastName = widget.playlist?.title.toString() ?? "";
+        CustomAudioPlayer.podcastDetails = widget.playlist?.description.toString() ?? "";
+        CustomAudioPlayer.podcastImage = widget.playlist?.images?[0].src ?? "";
+        CustomAudioPlayer.categoryName = widget.categoryName ?? "";
+        // await CustomAudioPlayer.playAudio();
+      });
+      setState(() {});
+    }
 
-      await CustomAudioPlayer.playAudio();
-    });
-    setState(() {});
   }
 
   @override

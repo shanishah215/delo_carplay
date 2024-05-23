@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfcfe1a2-cdba-4082-b910-c8d3adea9f42" name="Changes" comment="updated UI">
+    <list default="true" id="cfcfe1a2-cdba-4082-b910-c8d3adea9f42" name="Changes" comment="everything working fine">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/media_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/media_player.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/custom_audio_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/custom_audio_player.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +98,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716442416723</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="everything working fine">
+      <option name="closed" value="true" />
+      <created>1716454863897</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716454863897</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,7 +135,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="updated UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated UI" />
+    <MESSAGE value="everything working fine" />
+    <option name="LAST_COMMIT_MESSAGE" value="everything working fine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

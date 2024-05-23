@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MediaPlayer extends StatefulWidget {
-  MediaPlayer({super.key, required this.continuePlaying, this.playlist});
+  MediaPlayer({super.key, required this.continuePlaying, this.playlist, this.categoryName});
   final bool continuePlaying;
   Playlist? playlist;
+  String? categoryName;
 
   @override
   State<MediaPlayer> createState() => _MediaPlayerState();
@@ -29,6 +30,11 @@ class _MediaPlayerState extends State<MediaPlayer> {
 
   Future<void> initAudioPlayer() async {
     await CustomAudioPlayer.initAudioPlayer().then((value) async {
+      CustomAudioPlayer.podcastName = widget.playlist?.title.toString() ?? "";
+      CustomAudioPlayer.podcastDetails = widget.playlist?.description.toString() ?? "";
+      CustomAudioPlayer.podcastImage = widget.playlist?.images?[0].src ?? "";
+      CustomAudioPlayer.categoryName = widget.categoryName ?? "";
+
       await CustomAudioPlayer.playAudio();
     });
     setState(() {});
@@ -78,7 +84,7 @@ class _MediaPlayerState extends State<MediaPlayer> {
                   },
                   child: SvgPicture.asset(Constants.backArrowLight)),
               Text(
-                "Najnovejši podkasti",
+                widget.categoryName ?? CustomAudioPlayer.categoryName,
                 style: Theme.of(context)
                     .listTileTheme
                     .subtitleTextStyle!
@@ -103,20 +109,27 @@ class _MediaPlayerState extends State<MediaPlayer> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          'Markeš: Takrat sem verjel Janši',
-                          style: Theme.of(context)
-                              .listTileTheme
-                              .titleTextStyle!
-                              .copyWith(fontSize: 36),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60),
+                          child: Text(
+                            widget.playlist?.title ?? CustomAudioPlayer.podcastName,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .listTileTheme
+                                .titleTextStyle!
+                                .copyWith(fontSize: 36),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 120),
                           child: Text(
-                            'Ali Žerdin in Janez Markeš sta ob okrogli Ali Žerdin in Janez Markeš sta ob okrogli',
+                            widget.playlist?.description ?? CustomAudioPlayer.podcastDetails,
                             softWrap: true,
                             textAlign: TextAlign.center,
                             maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
                                 .listTileTheme
                                 .subtitleTextStyle!
@@ -199,8 +212,8 @@ class _MediaPlayerState extends State<MediaPlayer> {
                 ),
                 Expanded(
                     flex: 3,
-                    child: SvgPicture.asset(
-                      'assets/images/podcast_img.svg',
+                    child: Image.network(
+                      widget.playlist?.images?[0].src ?? CustomAudioPlayer.podcastImage,
                       height: 194,
                       width: 350,
                     ))

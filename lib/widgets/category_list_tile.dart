@@ -13,14 +13,14 @@ Widget categoryListTile(BuildContext context, {required String title, required S
         await PodcastRepository()
             .getPodcastList(categoryID)
             .then((data) {
-          print("got podcast");
           podcast = data;
+          print("got podcast $podcast");
           if(podcast != null) {
             print("full podcast");
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PodcastScreen(podcastList: podcast!,),
+                builder: (context) => PodcastScreen(podcastList: podcast!, categoryName: title,),
               ),
             );
           }

@@ -4,7 +4,7 @@ import '../screens/media_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-Widget podcastListTile(BuildContext context, {required String title, required Playlist? playlist}) {
+Widget podcastListTile(BuildContext context, {required String title, required Playlist? playlist, required String categoryName}) {
   return Card(
     margin: const EdgeInsets.symmetric(vertical: 2),
     child: ListTile(
@@ -15,6 +15,7 @@ Widget podcastListTile(BuildContext context, {required String title, required Pl
               builder: (context) => MediaPlayer(
                 continuePlaying: false,
                 playlist: playlist,
+                categoryName: categoryName,
               ),
             ));
       },
@@ -24,21 +25,16 @@ Widget podcastListTile(BuildContext context, {required String title, required Pl
           ),
           height: 80,
           width: 144,
-          child: SvgPicture.asset(
-            'assets/images/podcast_img.svg',
-            height: 80,
-            width: 144,
-            fit: BoxFit.cover,
-          )),
+          child: Image.network(playlist?.images?[0].src ?? "")),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       tileColor: Theme.of(context).listTileTheme.tileColor,
       title: Text(
-        title,
+        playlist?.title ?? "",
         style: Theme.of(context).listTileTheme.titleTextStyle,
       ),
       subtitle: Text(
-        'Ali Žerdin in Janez Markeš sta ob okrogli obletnici razpravljala...',
+        playlist?.description ?? "",
         style: Theme.of(context).listTileTheme.subtitleTextStyle,
       ),
     ),

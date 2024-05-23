@@ -1,8 +1,13 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'dart:math' as math;
 
 class CustomAudioPlayer {
   static late AssetsAudioPlayer assetsAudioPlayer;
   static Duration? songDuration = const Duration(seconds: 280);
+  static String podcastName = '';
+  static String podcastDetails = '';
+  static String podcastImage = '';
+  static String categoryName = '';
 
 
   static Future<void> initAudioPlayer() async {
@@ -14,7 +19,8 @@ class CustomAudioPlayer {
 
   static Future<void> getAudioDuration() async {
     assetsAudioPlayer.onReadyToPlay.listen((event) async {
-      songDuration = event?.duration;
+      // songDuration = event?.duration;
+      songDuration = Duration(minutes: 32, seconds: math.Random().nextInt(60));
     });
   }
 

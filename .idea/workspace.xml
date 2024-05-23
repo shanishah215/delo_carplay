@@ -4,33 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfcfe1a2-cdba-4082-b910-c8d3adea9f42" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/bloc/podcast_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/bloc/podcast_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/bloc/podcast_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/screens/podcast_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="cfcfe1a2-cdba-4082-b910-c8d3adea9f42" name="Changes" comment="updated UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/carplay_template/CP_home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/carplay_template/CP_home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/repository/podcast_list_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/repository/podcast_list_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/repository/podcast_menu_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/repository/podcast_menu_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/repository/podcast_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/repository/podcast_repo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/media_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/media_player.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/category_list_tile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/category_list_tile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/podcast_list_tile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/podcast_list_tile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,10 +87,44 @@
       <option name="presentableId" value="Default" />
       <updated>1713445251797</updated>
     </task>
+    <task id="LOCAL-00001" summary="updated UI">
+      <option name="closed" value="true" />
+      <created>1716442416723</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716442416723</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="updated UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
